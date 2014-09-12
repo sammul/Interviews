@@ -1,4 +1,5 @@
-//Q25,  Determine whether a binary tree is complete.
+//Determine whether a binary tree is complete.
+
 import java.util.LinkedList;
 import java.util.Queue;
 
