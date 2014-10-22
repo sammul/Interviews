@@ -27,4 +27,34 @@ public class SearchForRange {
         }
         return A[left]==target ? left : -1;
     }
+    
+    
+    public int[] searchRangeN(int[] A, int target) {
+        int left = searchLeft(A,target);
+        int right = searchRight(A,target);
+        int[] res = {left,right};
+        return res;
+    }
+    public int searchRight(int[] A, int target){
+        int start=0, end = A.length-1;
+        while(start<end){
+            int mid = (start+end)/2+(start+end)%2;
+            if(A[mid]>target)
+                end=mid-1;
+            else
+                start = mid;
+        }
+        return A[start]==target ? start : -1;
+    }
+    public int searchLeft(int[] A, int target){
+        int start = 0, end = A.length-1;
+        while(start<end){
+            int mid = (start+end)/2;
+            if(A[mid]<target)
+                start = mid+1;
+            else
+                end = mid;
+        }
+        return A[start]==target ? start : -1;
+    }
 }
