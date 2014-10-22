@@ -34,7 +34,7 @@ public class DFS{
             else{
                 Node t = s.pop();
                 res.add(t.val);
-		p=p.right;
+		p=t.right;
             }
         }
         return res;
