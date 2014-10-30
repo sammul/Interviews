@@ -72,6 +72,31 @@
 		}
 		findKthLargest(root.left, k[0]);
 	}
+
+	/*Validate BST method1*/
+	public boolean validateBST_m1(Node root){
+		return validateBST_m1_Helper(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
+	}
+	public boolean validateBST_m1_Helper(Node root, int min, int max){
+		if(root==null)
+			return true;
+		if(root.val<=min || root.val>=max)
+			return false;
+		return validateBST_m1_Helper(root.left, min, root.val) && validateBST_m1_Helper(root.right, root.val, max);
+	}
+
+	/*Validate BST method2*/
+	Node last = null;
+	public boolean validateBST_m2(Node root){
+		if(root==null)
+			return true;
+		boolean b1 = validateBST_m2(root.left);
+		if(last!=null && last.val >= root.val)
+			return false;
+		last = root;
+		boolean b2 = validateBST_m2(root.right);
+		return b1&&b2;
+	}
  }
  
  class Node{
