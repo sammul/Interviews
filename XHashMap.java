@@ -1,99 +1,59 @@
+
 public class XHashMap {
-    // for simplicity size is taken as 2^4
-    private static final int SIZE = 16;
-    private Entry table[] = new Entry[SIZE];
- 
-    /**
-     * User defined simple Map data structure
-     * with key and value.
-     * This is also used as linked list in case multiple
-     * key-value pairs lead to the same bucket with same
-     * hashcodes and different keys (collisions) using
-     * pointer 'next'.
-     */
-    class Entry {
-        final String key;
-        String value;
-        Entry next;
- 
-        Entry(String k, String v) {
-            key = k;
-            value = v;
-        }
- 
-        public String getValue() {
-            return value;
-        }
- 
-        public void setValue(String value) {
-            this.value = value;
-        }
- 
-        public String getKey() {
-            return key;
-        }
-    }
- 
-    /**
-     * Returns the entry associated with the specified key in the
-     * HashMap.  Returns null if the HashMap contains no mapping
-     * for the key.
-     */
-    public Entry get(String k) {
-        int hash = k.hashCode() % SIZE;
-        Entry e = table[hash];
- 
-        // if bucket is found then traverse through the linked list and
-        // see if element is present
-        while(e != null) {
-            if(e.key.equals(k)) {
-                return e;
-            }
-            e = e.next;
-        }
-        return null;
-    }
- 
-    /**
-     * Associates the specified value with the specified key in this map.
-     * If the map previously contained a mapping for the key, the old
-     * value is replaced.
-     */
-    public void put(String k, String v) {
-        int hash = k.hashCode() % SIZE;
-        Entry e = table[hash];
-        if(e != null) {
-            // it means we are trying to insert duplicate
-            // key-value pair, hence overwrite the current
-            // pair with the old pair
-            if(e.key.equals(k)) {
-                e.value = v;
-            } else {
-                // traverse to the end of the list and insert new element 
-                // in the same bucket
-                while(e.next != null) {
-                    e = e.next;
-                }
-                Entry entryInOldBucket = new Entry(k, v);
-                e.next = entryInOldBucket;
-            }
-        } else {
-            // new element in the map, hence creating new bucket
-            Entry entryInNewBucket = new Entry(k, v);
-            table[hash] = entryInNewBucket;
-        }
-    }
- 
-    // for testing our own map
-    public static void main(String[] args) {
-        TMHashMap tmhm = new TMHashMap();
- 
-        tmhm.put("Niranjan", "SMTS");
-        tmhm.put("Ananth", "SSE");
-        tmhm.put("Niranjan", "SMTS1");
-        tmhm.put("Chandu", "SSE");
- 
-        Entry e = tmhm.get("Niranjan");
-        System.out.println(""+e.getValue());
-    }
+	private static final int SIZE = 16;
+	private Entry table[];
+	class Entry{
+		private final int key;
+		private int value;
+		private Entry next;
+		Entry(int k, int v){
+			this.key = k;
+			this.value = v;
+			this.next = null;
+		}
+	}
+	XHashMap(){
+		table = new Entry[SIZE];
+	}
+	public Integer get(int k){
+		int hash = k%SIZE;
+		Entry e = table[hash];
+		while(e!=null){
+			if(e.key == k)
+				return e.value;
+			e = e.next;
+		}
+		return null;
+	}
+	public void put(int k, int v){
+		int hash = k%SIZE;
+		Entry e = table[hash];
+		Entry pre = null;
+		while(e!=null){
+			if(e.key==k){
+				e.value = v;
+				return;
+			}
+			else{
+				pre = e;
+				e = e.next;
+			}
+		}
+		if(pre!=null)
+			pre.next = new Entry(k,v);
+		else
+			table[hash] = new Entry(k,v);
+	}
+	
+	public static void main(String[] args){
+		XHashMap map = new XHashMap();
+		map.put(1, 2);
+		map.put(2, 3);
+		map.put(17, 4);
+		map.put(33, 5);
+		System.out.println(map.get(1));
+		System.out.println(map.get(17));
+		System.out.println(map.get(3));
+		System.out.println(map.get(33));
+	}
 }
