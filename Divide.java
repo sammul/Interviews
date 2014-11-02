@@ -1,3 +1,7 @@
+/*
+Divide two integers without using multiplication, division and mod operator.
+*/
+
 public class Divide {
     public int divide(int dividend, int divisor) {
         long base = 1;
