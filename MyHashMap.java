@@ -46,7 +46,7 @@ public class MyHashMap {
 	}
 	
 	public static void main(String[] args){
-		XHashMap map = new XHashMap();
+		MyHashMap map = new MyHashMap();
 		map.put(1, 2);
 		map.put(2, 3);
 		map.put(17, 4);
