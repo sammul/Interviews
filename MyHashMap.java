@@ -1,5 +1,5 @@
 
-public class XHashMap {
+public class MyHashMap {
 	private static final int SIZE = 16;
 	private Entry table[];
 	class Entry{
@@ -12,7 +12,7 @@ public class XHashMap {
 			this.next = null;
 		}
 	}
-	XHashMap(){
+	MyHashMap(){
 		table = new Entry[SIZE];
 	}
 	public Integer get(int k){
