@@ -23,7 +23,7 @@
 			}
 		}
 	}
-	int findCloest(Node root, int target){
+	int findClosest(Node root, int target){
 		Node c = root;
 		int closest = Integer.MAX_VALUE;
 		while(c!=null){
@@ -71,6 +71,24 @@
 			return;
 		}
 		findKthLargest(root.left, k[0]);
+	}
+	
+	/*Find the k-th largest in BST*/
+	class TreeNode{
+		TreeNode left, right;
+		int val;
+		int rightChildNum;
+	}
+	public TreeNode findKthLargestInBST(TreeNode root, int k){
+		if(root==null)
+			return null;
+		if(k < root.rightChildNum){
+			return findKthLargestInBST(root.right,k);
+		}
+		k -= root.rightChildNum;
+		if(k==0)
+			return root;
+		return findKthLargestInBST(root.left,k--);
 	}
 
 	/*Validate BST method1*/
