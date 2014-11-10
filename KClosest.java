@@ -6,16 +6,13 @@ public class KClosest{
 			return null;
 		ArrayList<Integer> res = new ArrayList<Integer>();
 		int start = 0, end = arr.length-1;
-		while(start<end){
+		while(start < end-1){
 			int mid = (start+end)/2;
 			if(arr[mid] < target)
-				start = mid+1;
+				start = mid;
 			else
 				end = mid;
 		}
-		//arr[start] the closest
-		if(start > 0 && Math.abs(arr[start-1]-target) < Math.abs(arr[start]-target))
-			start--;
 		int i=start-1, j=start+1, count = 1;
 		res.add(arr[start]);
 		while(count<k){
@@ -33,7 +30,7 @@ public class KClosest{
 	}
 	public static void main(String[] args){
 		int[] arr = {1,2,5,6,7,8,9,20,23};
-		int target = 14, k = 4;
+		int target = 14, k = 3;
 		KClosest r = new KClosest();
 		ArrayList<Integer> p = r.kclosest(arr, k, target);
 		for(int i: p)
