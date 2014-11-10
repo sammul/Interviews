@@ -115,6 +115,27 @@
 		boolean b2 = validateBST_m2(root.right);
 		return b1&&b2;
 	}
+
+	/*Vertical Level Order Travesal*/
+	public ArrayList<ArrayList<Integer>> verticalOrderTravesal(TreeNode root){
+		HashMap<Integer,ArrayList<Integer>> map = new HashMap<Integer,ArrayList<Integer>>();
+		vertical(root,0,map);
+		ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
+		for(int l : map.keySet()){
+			res.add(l,map.get(l));
+		}
+		return res;
+	}
+	public void vertical(TreeNode t, int l, HashMap<Interger,ArrayList<Integer>> map){
+		if(t==null)
+			return;
+		if(!map.containsKey(l)){
+			map.put(l,new ArrayList<Integer>());
+		}
+		map.get(l).add(t.val);
+		vertical(t.left,l-1,map);
+		vertical(t.right,l+1,map);
+	}
  }
  
  class Node{
