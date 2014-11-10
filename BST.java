@@ -116,8 +116,8 @@
 		return b1&&b2;
 	}
 
-	/*Vertical Level Order Travesal*/
-	public ArrayList<ArrayList<Integer>> verticalOrderTravesal(TreeNode root){
+	/*Vertical Level Order Traversal*/
+	public ArrayList<ArrayList<Integer>> verticalOrderTraversal(TreeNode root){
 		HashMap<Integer,ArrayList<Integer>> map = new HashMap<Integer,ArrayList<Integer>>();
 		vertical(root,0,map);
 		ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
