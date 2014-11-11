@@ -1,4 +1,3 @@
-import java.util.Stack;
 public class ReverseLinkR{
     public Node reverse(Node n){
         if(n==null || n.next==null)
