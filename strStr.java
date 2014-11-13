@@ -1,31 +1,33 @@
 public class strStr{
-	public static String strStrRollingHash(String haystack, String needle){
-		final int BASE = 27;
-		long M = 1<<29+1;
-		int hl=haystack.length(), nl=needle.length();
-		char[] harr = haystack.toCharArray();
-		char[] narr = needle.toCharArray();
-		if(hl<nl){
-			return null;
-		}
-		else if(nl==0){
-			return haystack;
-		}
-		long h_hashv = 0, n_hashv = 0;
-		long k=1;
-		for(int i=0; i<nl; i++){
-			h_hashv = (h_hashv*BASE+(harr[i]-'a'))%M;
-			n_hashv = (n_hashv*BASE+(narr[i]-'a'))%M;
-			k = (k*BASE)%M;
-		}
-		int i=nl, j=0;
-		for(;i<hl; i++,j++){
-			if(h_hashv == n_hashv)
-				return haystack.substring(j,hl);
-			h_hashv = (h_hashv*BASE - k*(harr[j]-'a')+ (harr[i]-'a'))%M;
-		}
-		return null;
-	}
+    public static final long MOD = (1<<27)+(1<<20)+(1<<5)+101;
+    public static final long BASE = 127;
+    public String strStr(String haystack, String needle) {
+        if(haystack==null || needle==null)
+            return null;
+        if(needle.equals(""))
+            return haystack;
+        long nee_v=0,hay_v=0,k=1;
+        int nl = needle.length(), hl = haystack.length();
+        if(hl<nl)
+            return null;
+        for(int i=0; i<nl; i++){
+            nee_v = (nee_v*BASE+(int)needle.charAt(i))%MOD;
+            hay_v = (hay_v*BASE+(int)haystack.charAt(i))%MOD;
+            k = (k*BASE)%MOD;
+        }
+        int i=0, j=nl;
+        for(; j<=hl; i++,j++){
+            if(nee_v==hay_v){
+                if(needle.equals(haystack.substring(i,j)))
+                    return haystack.substring(i,hl);
+            }
+            if(j==hl)
+                break;
+            hay_v = (hay_v*BASE-((long)haystack.charAt(i))*k+(long)haystack.charAt(j)+MOD*BASE)%MOD;
+        }
+        return null;
+    }
+}
 	public static String strStrBasic(String haystack, String needle){
 		int hl = haystack.length();
 		int nl = needle.length();
