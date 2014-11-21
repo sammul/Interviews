@@ -1,4 +1,5 @@
 public class OneEditAway{
+	/*Detemine whether two strings are one edit away*/
 	public boolean oneEditAway(String s1, String s2){
 		if(s1==null||s2==null)
 			return false;
