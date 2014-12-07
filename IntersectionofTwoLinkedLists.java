@@ -35,7 +35,7 @@ Special thanks to @stellari for adding this problem and creating all test cases
  *     }
  * }
  */
-public class Solution {
+public class IntersectionofTwoLinkedLists {
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
         int la = getLength(headA);
         int lb = getLength(headB);
